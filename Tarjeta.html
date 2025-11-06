@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feliz Cumpleaños, María</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="scene">
+    <div class="confetti" aria-hidden="true"></div>
+
+    <section class="card" role="article" aria-label="Carta de cumpleaños para María">
+      <header class="card__header">
+        <h1 class="title">¡Feliz 15, María!</h1>
+        <p class="subtitle">Hoy celebramos tu brillo y tus sueños</p>
+      </header>
+
+      <div class="card__content">
+        <p>
+          Querida <strong>María</strong>,
+        </p>
+        <p>
+          Hoy cumples <strong>15 años</strong> y comienza una etapa llena de magia, esperanza y
+          nuevas aventuras. Que cada paso que des esté guiado por la alegría,
+          la confianza en ti misma y la certeza de que puedes lograr todo lo que te propongas.
+        </p>
+        <p>
+          Gracias por tu sonrisa que ilumina, por tu corazón generoso y por recordarnos que los
+          sueños se alcanzan con valentía. Deseo que tu vida se pinte de colores hermosos, que la
+          música acompañe tus días y que el amor de quienes te queremos siempre te abrace.
+        </p>
+        <p>
+          ¡Brilla siempre, princesa! Hoy y siempre, celebra tu historia, tu fuerza y tu esencia.
+        </p>
+        <p class="signature">Con cariño,</p>
+        <p class="signature">Tu familia y amigos</p>
+      </div>
+
+      <footer class="card__footer">
+        <button class="btn" onclick="toggleMusic()" aria-pressed="false" aria-label="Encender o apagar música">♫ Música</button>
+        <audio id="bgm" loop>
+          <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_0d9e9f6a2a.mp3" type="audio/mpeg">
+        </audio>
+      </footer>
+    </section>
+  </main>
+
+  <script>
+    // Animación simple de confeti
+    const confettiContainer = document.querySelector('.confetti');
+    const colors = ['#ff7eb9', '#ff65a3', '#7afcff', '#feff9c', '#fff740'];
+
+    function createConfettiPiece() {
+      const el = document.createElement('span');
+      el.className = 'confetti__piece';
+      el.style.left = Math.random() * 100 + 'vw';
+      el.style.background = colors[Math.floor(Math.random() * colors.length)];
+      el.style.animationDelay = Math.random() * 3 + 's';
+      el.style.transform = `rotate(${Math.random() * 360}deg)`;
+      confettiContainer.appendChild(el);
+      setTimeout(() => el.remove(), 8000);
+    }
+
+    for (let i = 0; i < 120; i++) {
+      createConfettiPiece();
+    }
+    setInterval(() => {
+      for (let i = 0; i < 10; i++) createConfettiPiece();
+    }, 1000);
+
+    // Control de música
+    function toggleMusic() {
+      const audio = document.getElementById('bgm');
+      const btn = document.querySelector('.btn');
+      if (audio.paused) {
+        audio.play();
+        btn.setAttribute('aria-pressed', 'true');
+        btn.classList.add('btn--active');
+      } else {
+        audio.pause();
+        btn.setAttribute('aria-pressed', 'false');
+        btn.classList.remove('btn--active');
+      }
+    }
+  </script>
+</body>
+</html>
